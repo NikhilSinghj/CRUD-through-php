@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>documents</title>
+    <link rel="stylesheet" href="style.css">
+<style>
+    * {
+    box-sizing: border-box; 
+    
+  }
+ 
+  
+  
+  h1,h2{
+    text-align: center;
+    font-size: 40px;
+  }
+  
+  
+  input[type=address] {
+  
+    padding: 10px 10px;
+    margin: 4px 0;
+    
+  }
+
+  button[type=submit]{
+    
+    background-color: rgb(8, 70, 8);
+    color: white;
+    padding: 16px 32px;
+    margin: 4px 2px;
+    cursor: pointer;
+    
+    
+
+
+  }
+ 
+  
+ .main{
+    
+  display:flex;
+  flex-direction: row;
+  margin-left: 480px;
+  
+    
+    
+    
+
+  
+
+ }
+</style>
+
+  </head>
+<body>
+         
+   
+        
+
+        
+            <div class="main">
+
+            
+                
+
+            
+            
+            <form  action="edit.php " method="post" >
+                 
+                <h1>Update Form</h1>
+                <h2>Enter Your New Details</h2>
+
+                <label for="firstname"><b>First Name</b></label> 
+                <input type="text" id="name" placeholder="Enter your first name"  name="firstname">
+                <br>
+                <br>
+                <label for="lastname"><b>Last Name</b></label> 
+                <input type="text" id="lastname" placeholder="Enter your second name" name="lastname" >
+              
+                <br>
+                <br>
+                
+                <label for="gender"><b>Gender</b></label> 
+                <input type="radio" id="male" name="gender" value="m">
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="f">
+                <label for="female">Female</label>
+                <input type="radio" id="other" name="gender" value="o">
+                <label for="other">Other</label>
+                <br>
+                <br>
+                
+                <label for="email"><b>Email</b></label> 
+        
+                <input type="email" id="email" name="email" placeholder="kiet@email.com"   required>
+                <br>
+                <br>
+
+                <label for="contact"><b>Contact</b></label> 
+                <input type="tel" id="contact" name="contact"  placeholder="0123456789" maxlength="10" size="10" >
+                <br>
+                <br>
+                <label for="address"><b>Address</b></label> 
+                <input type="address" placeholder="Enter your address" name="address" >
+                <br>
+                <br>
+                <label for="password"><b>Password</b></label>
+                <input type="text" placeholder="Enter your password" name="password" >
+                <br>
+                <br>
+                <label for="password"><b>Confirm Password</b></label>
+                <input type="text" placeholder="Enter your password Again" name="cpassword" >
+                <br>
+                <br>
+                
+                <div class="button">
+                <button type="submit" id="save" value="save" ><b>submit</b></button>
+              
+            </div>
+                
+            </div>  
+        
+            </div>
+          
+      
+        
+
+
+      
+</body>
+</html>
+
+
+
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors',1);
+
+// connecting php with database
+
+$conn = mysqli_connect('localhost', 'nikhil', 'Nik212107@','registration');
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
+ 
+
+
+$email=$_POST['email'];
+$password = $_POST['password'];
+
+
+
+$check2=" SELECT * FROM student WHERE (email='$email');";
+$result2=mysqli_query($conn,$check2);
+
+$check=" SELECT email,password,user FROM student WHERE (email='$email');";
+$result=mysqli_query($conn,$check);
+$row=mysqli_fetch_assoc($result);
+
+while($row){
+    $check_username = $row['email'];
+    $check_password = $row['password'];
+
+    // echo ($email == $check_username && $password == $check_password);
+
+    // echo ($email == $check_username && $password != $check_password);
+   
+    if ($email == $check_username && $password == $check_password){
+      //  echo "po";
+          if (mysqli_num_rows($result2) > 0) {
+            // echo "fg";
+            if($row["user"]=='admin'){
+              $sql="SELECT * FROM student WHERE deleted <> 1";
+              $result3=mysqli_query($conn,$sql);
+              $row3 = mysqli_fetch_assoc($result3);
+              echo "<b>All User Details!<b> <br><br>";
+              while($row3=mysqli_fetch_assoc($result3)){
+                           
+              
+                            echo " First Name : " . $row3['firstname'] ."<br>".
+                            "Last Name :" . $row3['lastname'] ."<br>".
+                            "Email :" . $row3['email'] ."<br>".
+                            "Gender :" . $row3['gender'] . "<br>".
+                            "Contact :" . $row3['contact'] ."<br>".
+                            "Address :" . $row3['address']."<br>".
+                            "User Type :" .$row3['user']."<br>";
+                            echo "<br>";
+                            echo "<br>";
+                           
+                           
+                         echo" <a href='edit.php?fn=$row3[firstname] & ln=$row3[lastname] & em=$row3[email] & gen=$row3[gender] & con=$row3[contact] & add=$row3[address]' >Edit</a>";
+                        //  echo "<br";
+                         echo" <a href='delete.php?em=$row3[email] & us=$row3[user]' >Delete</a>";
+                            
+
+                          echo "<br>";
+                          echo "<br>";
+                            
+              }           
+            }
+            else{
+              // echo "sdfgh";
+                $row2 = mysqli_fetch_assoc($result2);
+                
+                echo " User Details!<br>";
+  
+                echo " First Name : " . $row2["firstname"] ."<br>".
+                "Last Name :" . $row2["lastname"] ."<br>".
+                "Email :" . $row2["email"] ."<br>".
+                "Gender :" . $row2["gender"] . "<br>".
+                "Contact :" . $row2["contact"] ."<br>".
+                "Address :" . $row2["address"]."<br>";
+
+                echo "<br>";
+
+                echo" <a href='edit.php?fn=$row2[firstname] & ln=$row2[lastname] & em=$row2[email] & gen=$row2[gender] & con=$row2[contact] & add=$row2[address]' >Edit</a>";
+
+                echo "<br>";
+
+            // $var= <input type="button" value="edit" onClick="document.location.href='some/page'" />;
+                
+
+            } 
+          }
+         
+      }
+    
+    elseif($email == $check_username && $password != $check_password){
+        echo "Password Does Not Matched";
+           }     
+    // else {
+    // echo "fgdren";
+    //     header("location: index.html");
+    // }   
+}
+
+?>
+
+
+
+<!-- error_reporting(E_ALL);
+ini_set('display_errors',1);
+
+// connecting php with database
+
+$conn = mysqli_connect('localhost', 'nikhil', 'Nik212107@','registration');
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
+ 
+
+
+$email=$_POST['email'];
+$password = $_POST['password'];
+
+
+$check=" SELECT * FROM student WHERE (email='$email');";
+
+$result=mysqli_query($conn,$check);
+
+
+
+if (mysqli_num_rows($result) > 0) {
+  
+  $row = mysqli_fetch_assoc($result);
+
+    echo " First Name : " . $row["firstname"] ."<br>".
+    "Last Name :" . $row["lastname"] ."<br>".
+    "Email :" . $row["email"] ."<br>".
+    "Gender :" . $row["gender"] . "<br>".
+    "Contact :" . $row["contact"] ."<br>".
+    "Address :" . $row["address"]."<br>";
+    
+    mysqli_close($conn);
+
+}
+
+else {
+    
+    header("location: index.html");
+
+    
+
+if($check["type"]=='admin'){
+  $sql="SELECT * FROM student ";
+  $result3=mysqli_query($conn,$sql);
+  $row3 = mysqli_fetch_assoc($result3);
+  
+               echo "All User Details!<br>";
+  
+                echo " First Name : " . $row2["firstname"] ."<br>".
+                "Last Name :" . $row2["lastname"] ."<br>".
+                "Email :" . $row2["email"] ."<br>".
+                "Gender :" . $row2["gender"] . "<br>".
+                "Contact :" . $row2["contact"] ."<br>".
+                "Address :" . $row2["address"]."<br>";
+
+}
+
+
+ } -->
+
+ 
+
+ 
+           
+
+
+
+
+
+
+
+
+

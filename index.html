@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>documents</title>
+    <link rel="stylesheet" href="style.css">
+<style>
+    * {
+    box-sizing: border-box; 
+    
+  }
+ 
+  
+  .column {
+    float: left;
+    padding: 10px;
+    height: 950px; 
+  }
+  h1{
+    text-align: center;
+    font-size: 40px;
+  }
+  
+  .image{
+    width: 100%;
+    height: 100%;
+  }
+  
+  
+  .left {
+    background-color: black;
+    width: 35%;
+    
+  }
+  
+  .right {
+    width: 65%;
+    background-color: aquamarine;
+    
+  }
+
+.image2{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+  }
+  input[type=address] {
+  
+    padding: 10px 10px;
+    margin: 4px 0;
+    
+  }
+
+  button[type=submit]{
+    
+    background-color: rgb(8, 70, 8);
+    color: white;
+    padding: 16px 32px;
+    margin: 4px 2px;
+    cursor: pointer;
+    margin-left:120px;
+    
+
+
+  }
+ 
+  
+ .main{
+    
+  display:flex;
+  flex-direction: row;
+  margin-left: 420px;
+  margin-right:340px;
+  background-color: rgb(212, 186, 201);
+  padding:2%;  
+    
+    
+
+  
+
+ }
+</style>
+
+  </head>
+<body>
+         
+        
+        <div class="outer">
+        
+          <div class="column left">
+            <img class="image" src="https://static.vecteezy.com/system/resources/thumbnails/022/448/291/small/save-earth-day-poster-environment-day-nature-green-ai-generative-glossy-background-images-tree-and-water-free-photo.jpg" alt="image" >
+          </div>
+        <div class="column right">
+            <h1>KIET GROUP OF INSTITUTIONS GHAZIABAD</h1>
+            
+            <div >
+              <img class="image2" src="https://yt3.googleusercontent.com/ytc/AGIKgqMGc8isEPXMuaHsSuJlieCnY3t4MMEOAH2lgwJtpw=s900-c-k-c0x00ffffff-no-rj" alt="kietlogo" style=" width: 200px; height: 200px;">
+            </div>
+            
+        <br>
+        <br>
+        
+
+        
+            <div class="main">
+
+            
+                
+
+            
+            
+            <form  action="registration.php " method="post" >
+                 
+                <h2>Registration Form</h2>
+
+                <label for="firstname"><b>First Name</b></label> 
+                <input type="text" id="name" placeholder="Enter your first name"  name="firstname" pattern="[A-Za-z ]{1,32}" required >
+                <br>
+                <br>
+                <label for="lastname"><b>Last Name</b></label> 
+                <input type="text" id="lastname" placeholder="Enter your second name" name="lastname" pattern="[A-Za-z ]{1,32}" required>
+              
+                <br>
+                <br>
+                
+                <label for="gender"><b>Gender</b></label> 
+                <input type="radio" id="male" name="gender" value="m">
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="f">
+                <label for="female">Female</label>
+                <input type="radio" id="other" name="gender" value="o">
+                <label for="other">Other</label>
+                <br>
+                <br>
+                
+                <label for="email"><b>Email</b></label> 
+        
+                <input type="email" id="email" name="email" placeholder="kiet@email.com"   required>
+                <br>
+                <br>
+
+                <label for="contact"><b>Contact</b></label> 
+                <input type="tel" id="contact" name="contact"  placeholder="0123456789" maxlength="10" size="10" pattern="[789][0-9]{9}" required>
+                <br>
+                <br>
+                <label for="address"><b>Address</b></label> 
+                <input type="address" placeholder="Enter your address" name="address" >
+                <br>
+                <br>
+                <label for="password"><b>Password</b></label>
+                <input type="text" placeholder="Enter your password" name="password" required>
+                <br>
+                <br>
+                <label for="password"><b>Confirm Password</b></label>
+                <input type="text" placeholder="Enter your password Again" name="cpassword" required>
+                <br>
+                <br>
+                
+                <div class="button">
+                <button type="submit" id="save" value="save" ><b>submit</b></button>
+              
+            </div>
+                
+            </div>  
+        
+            </div>
+          
+      
+        
+
+
+      
+</body>
+</html>
